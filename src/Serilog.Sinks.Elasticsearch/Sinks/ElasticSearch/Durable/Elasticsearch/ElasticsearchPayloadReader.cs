@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 
 namespace Serilog.Sinks.Elasticsearch.Durable
 {

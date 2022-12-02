@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
 using FluentAssertions;
+using OpenSearch.Net;
 
 namespace Serilog.Sinks.Elasticsearch.Tests.Discrepancies
 {
     public class ElasticsearchSinkUniformityTestsBase : ElasticsearchSinkTestsBase
     {
-        public ElasticsearchSinkUniformityTestsBase(IElasticsearchSerializer serializer)
+        public ElasticsearchSinkUniformityTestsBase(IOpenSearchSerializer serializer)
         {
             _options.Serializer = serializer;
         }

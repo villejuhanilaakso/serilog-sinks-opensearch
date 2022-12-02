@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting;
@@ -178,7 +178,7 @@ namespace Serilog.Sinks.Elasticsearch
         ///<summary>
         /// When passing a serializer unknown object will be serialized to object instead of relying on their ToString representation
         /// </summary>
-        public IElasticsearchSerializer Serializer { get; set; }
+        public IOpenSearchSerializer Serializer { get; set; }
 
         /// <summary>
         /// The connection pool describing the cluster to write event to

@@ -1,5 +1,5 @@
 using System;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 
 namespace Serilog.Sinks.Elasticsearch.IntegrationTests.Bootstrap
 {

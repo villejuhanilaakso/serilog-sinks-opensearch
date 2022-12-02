@@ -18,7 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 using Serilog.Debugging;
 using Serilog.Events;
 using Serilog.Sinks.PeriodicBatching;
@@ -76,7 +76,7 @@ namespace Serilog.Sinks.Elasticsearch
         /// </summary>
         /// <param name="events">The events to emit.</param>
         /// <returns>Response from Elasticsearch</returns>
-        protected virtual Task<T> EmitBatchCheckedAsync<T>(IEnumerable<LogEvent> events) where T : class, IElasticsearchResponse, new()
+        protected virtual Task<T> EmitBatchCheckedAsync<T>(IEnumerable<LogEvent> events) where T : class, IOpenSearchResponse, new()
         {
             // ReSharper disable PossibleMultipleEnumeration
             if (events == null || !events.Any())
@@ -91,7 +91,7 @@ namespace Serilog.Sinks.Elasticsearch
         /// </summary>
         /// <param name="events">The events to emit.</param>
         /// <returns>Response from Elasticsearch</returns>
-        protected virtual T EmitBatchChecked<T>(IEnumerable<LogEvent> events) where T : class, IElasticsearchResponse, new()
+        protected virtual T EmitBatchChecked<T>(IEnumerable<LogEvent> events) where T : class, IOpenSearchResponse, new()
         {
             // ReSharper disable PossibleMultipleEnumeration
             if (events == null || !events.Any())

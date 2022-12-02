@@ -1,6 +1,6 @@
-﻿using Elasticsearch.Net;
-using Nest;
-using Nest.JsonNetSerializer;
+﻿using OpenSearch.Client;
+using OpenSearch.Client.JsonNetSerializer;
+using OpenSearch.Net;
 using Xunit;
 
 namespace Serilog.Sinks.Elasticsearch.Tests.Discrepancies

@@ -22,7 +22,7 @@ using Serilog.Events;
 using Serilog.Sinks.Elasticsearch;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 using Serilog.Formatting;
 using Serilog.Sinks.Elasticsearch.Durable;
 
@@ -174,7 +174,7 @@ namespace Serilog
             int? numberOfReplicas = null,
             IFormatProvider formatProvider = null,
             IConnection connection = null,
-            IElasticsearchSerializer serializer = null,
+            IOpenSearchSerializer serializer = null,
             IConnectionPool connectionPool = null,
             ITextFormatter customFormatter = null,
             ITextFormatter customDurableFormatter = null,

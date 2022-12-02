@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 using Serilog.Debugging;
 
 namespace Serilog.Sinks.Elasticsearch.Durable
@@ -12,7 +12,7 @@ namespace Serilog.Sinks.Elasticsearch.Durable
     /// </summary>
     public class ElasticsearchLogClient : ILogClient<List<string>>
     {
-        private readonly IElasticLowLevelClient _elasticLowLevelClient;
+        private readonly IOpenSearchLowLevelClient _elasticLowLevelClient;
         private readonly Func<string, long?, string, string> _cleanPayload;
         private readonly ElasticOpType _elasticOpType;
 
@@ -22,7 +22,7 @@ namespace Serilog.Sinks.Elasticsearch.Durable
         /// <param name="elasticLowLevelClient"></param>
         /// <param name="cleanPayload"></param>
         /// <param name="elasticOpType"></param>
-        public ElasticsearchLogClient(IElasticLowLevelClient elasticLowLevelClient,
+        public ElasticsearchLogClient(IOpenSearchLowLevelClient elasticLowLevelClient,
             Func<string, long?, string, string> cleanPayload,
             ElasticOpType elasticOpType)
         {

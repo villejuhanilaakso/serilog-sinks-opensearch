@@ -15,11 +15,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Specification.CatApi;
-using Elasticsearch.Net.Specification.IndicesApi;
+using OpenSearch.Net;
+using OpenSearch.Net.Specification.CatApi;
+using OpenSearch.Net.Specification.IndicesApi;
 using Serilog.Debugging;
 using Serilog.Events;
 using Serilog.Formatting;
@@ -45,7 +44,7 @@ namespace Serilog.Sinks.Elasticsearch
         private readonly ITextFormatter _formatter;
         private readonly ITextFormatter _durableFormatter;
 
-        private readonly ElasticLowLevelClient _client;
+        private readonly OpenSearchLowLevelClient _client;
 
         private readonly bool _registerTemplateOnStartup;
         private readonly string _templateName;
@@ -58,7 +57,7 @@ namespace Serilog.Sinks.Elasticsearch
             (DiscoveredVersion?.StartsWith("7.") ?? false)
             && _options.AutoRegisterTemplateVersion == AutoRegisterTemplateVersion.ESv6;
         public ElasticsearchSinkOptions Options => _options;
-        public IElasticLowLevelClient Client => _client;
+        public IOpenSearchLowLevelClient Client => _client;
         public ITextFormatter Formatter => _formatter;
         public ITextFormatter DurableFormatter => _durableFormatter;
 
@@ -92,7 +91,7 @@ namespace Serilog.Sinks.Elasticsearch
 
             configuration.ThrowExceptions();
 
-            _client = new ElasticLowLevelClient(configuration);
+            _client = new OpenSearchLowLevelClient(configuration);
 
             _formatter = options.CustomFormatter ?? CreateDefaultFormatter(options);
 
@@ -174,7 +173,7 @@ namespace Serilog.Sinks.Elasticsearch
 
                 if (!result.Success)
                 {
-                    ((IElasticsearchResponse)result).TryGetServerErrorReason(out var serverError);
+                    ((IOpenSearchResponse)result).TryGetServerErrorReason(out var serverError);
                     SelfLog.WriteLine("Unable to create the template. {0}", serverError);
 
                     if (_options.RegisterTemplateFailure == RegisterTemplateRecovery.FailSink)

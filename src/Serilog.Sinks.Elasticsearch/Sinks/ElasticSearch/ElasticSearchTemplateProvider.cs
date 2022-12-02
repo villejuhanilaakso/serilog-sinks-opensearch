@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net.Specification.IndicesApi;
 
 namespace Serilog.Sinks.Elasticsearch
 {

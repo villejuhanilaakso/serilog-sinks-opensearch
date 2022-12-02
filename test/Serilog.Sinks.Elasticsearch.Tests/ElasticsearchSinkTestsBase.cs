@@ -4,15 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 using FluentAssertions;
-using Nest;
-using Xunit;
-using Serilog.Debugging;
 using Serilog.Sinks.Elasticsearch.Tests.Domain;
-using Nest.JsonNetSerializer;
-using System.Collections;
 using System.Threading;
+using OpenSearch.Client;
+using OpenSearch.Client.JsonNetSerializer;
+using OpenSearch.Net;
 
 namespace Serilog.Sinks.Elasticsearch.Tests
 {
@@ -25,7 +22,7 @@ namespace Serilog.Sinks.Elasticsearch.Tests
         protected List<int> _seenHttpHeads = new List<int>();
         protected List<Tuple<Uri, int>> _seenHttpGets = new List<Tuple<Uri, int>>();
         protected List<Tuple<Uri, string>> _seenHttpPuts = new List<Tuple<Uri, string>>();
-        private IElasticsearchSerializer _serializer;
+        private IOpenSearchSerializer _serializer;
 
         protected int _templateExistsReturnCode = 404;
 

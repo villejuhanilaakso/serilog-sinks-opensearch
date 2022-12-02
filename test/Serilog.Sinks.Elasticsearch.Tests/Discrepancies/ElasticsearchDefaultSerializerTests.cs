@@ -1,4 +1,4 @@
-﻿using Elasticsearch.Net;
+﻿using OpenSearch.Net;
 using Xunit;
 
 namespace Serilog.Sinks.Elasticsearch.Tests.Discrepancies

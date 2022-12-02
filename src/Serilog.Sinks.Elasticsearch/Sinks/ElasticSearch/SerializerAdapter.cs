@@ -2,16 +2,16 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
+using OpenSearch.Net;
 using Serilog.Formatting.Elasticsearch;
 
  namespace Serilog.Sinks.Elasticsearch
 {
-    internal class SerializerAdapter : ISerializer, IElasticsearchSerializer
+    internal class SerializerAdapter : ISerializer, IOpenSearchSerializer
     {
-        private readonly IElasticsearchSerializer _elasticsearchSerializer;
+        private readonly IOpenSearchSerializer _elasticsearchSerializer;
 
-         internal SerializerAdapter(IElasticsearchSerializer elasticsearchSerializer)
+         internal SerializerAdapter(IOpenSearchSerializer elasticsearchSerializer)
         {
             _elasticsearchSerializer = elasticsearchSerializer ??
                                        throw new ArgumentNullException(nameof(elasticsearchSerializer));
