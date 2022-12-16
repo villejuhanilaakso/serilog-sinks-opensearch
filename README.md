@@ -36,7 +36,7 @@ The Serilog OpenSearch sink project is a sink (basically a writer) for the Seril
 
 To use this package currently, you will need to create a nuget package and install it locally.
 
-Register the sink in code or using the appSettings reader (from v2.0.42+) as shown below. Make sure to specify the version of ES you are targeting. Be aware that the AutoRegisterTemplate option will not overwrite an existing template.
+Register the sink in code or using the appSettings reader (from v2.0.42+) as shown below. Be aware that the AutoRegisterTemplate option will not overwrite an existing template.
 
 ```csharp
 var loggerConfig = new LoggerConfiguration()
@@ -49,38 +49,38 @@ This example shows the options that are currently available when using the appSe
 
 ```xml
   <appSettings>
-    <add key="serilog:using" value="Serilog.Sinks.Elasticsearch"/>
-    <add key="serilog:write-to:Elasticsearch.nodeUris" value="http://localhost:9200;http://remotehost:9200"/>
-    <add key="serilog:write-to:Elasticsearch.indexFormat" value="custom-index-{0:yyyy.MM}"/>
-    <add key="serilog:write-to:Elasticsearch.templateName" value="myCustomTemplate"/>    
-    <add key="serilog:write-to:Elasticsearch.pipelineName" value="myCustomPipelineName"/>
-    <add key="serilog:write-to:Elasticsearch.batchPostingLimit" value="50"/>
-    <add key="serilog:write-to:Elasticsearch.batchAction" value="Create"/><!-- "Index" is default -->
-    <add key="serilog:write-to:Elasticsearch.period" value="2"/>
-    <add key="serilog:write-to:Elasticsearch.inlineFields" value="true"/>
-    <add key="serilog:write-to:Elasticsearch.restrictedToMinimumLevel" value="Warning"/>
-    <add key="serilog:write-to:Elasticsearch.bufferBaseFilename" value="C:\Temp\SerilogElasticBuffer"/>
-    <add key="serilog:write-to:Elasticsearch.bufferFileSizeLimitBytes" value="5242880"/>
-    <add key="serilog:write-to:Elasticsearch.bufferLogShippingInterval" value="5000"/>
-    <add key="serilog:write-to:Elasticsearch.bufferRetainedInvalidPayloadsLimitBytes" value="5000"/>
-    <add key="serilog:write-to:Elasticsearch.bufferFileCountLimit " value="31"/>
-    <add key="serilog:write-to:Elasticsearch.connectionGlobalHeaders" value="Authorization=Bearer SOME-TOKEN;OtherHeader=OTHER-HEADER-VALUE" />
-    <add key="serilog:write-to:Elasticsearch.connectionTimeout" value="5" />
-    <add key="serilog:write-to:Elasticsearch.emitEventFailure" value="WriteToSelfLog" />
-    <add key="serilog:write-to:Elasticsearch.queueSizeLimit" value="100000" />
-    <add key="serilog:write-to:Elasticsearch.autoRegisterTemplate" value="true" />    
-    <add key="serilog:write-to:Elasticsearch.overwriteTemplate" value="false" />
-    <add key="serilog:write-to:Elasticsearch.registerTemplateFailure" value="IndexAnyway" />
-    <add key="serilog:write-to:Elasticsearch.deadLetterIndexName" value="deadletter-{0:yyyy.MM}" />
-    <add key="serilog:write-to:Elasticsearch.numberOfShards" value="20" />
-    <add key="serilog:write-to:Elasticsearch.numberOfReplicas" value="10" />
-    <add key="serilog:write-to:Elasticsearch.formatProvider" value="My.Namespace.MyFormatProvider, My.Assembly.Name" />
-    <add key="serilog:write-to:Elasticsearch.connection" value="My.Namespace.MyConnection, My.Assembly.Name" />
-    <add key="serilog:write-to:Elasticsearch.serializer" value="My.Namespace.MySerializer, My.Assembly.Name" />
-    <add key="serilog:write-to:Elasticsearch.connectionPool" value="My.Namespace.MyConnectionPool, My.Assembly.Name" />
-    <add key="serilog:write-to:Elasticsearch.customFormatter" value="My.Namespace.MyCustomFormatter, My.Assembly.Name" />
-    <add key="serilog:write-to:Elasticsearch.customDurableFormatter" value="My.Namespace.MyCustomDurableFormatter, My.Assembly.Name" />
-    <add key="serilog:write-to:Elasticsearch.failureSink" value="My.Namespace.MyFailureSink, My.Assembly.Name" />
+    <add key="serilog:using" value="Serilog.Sinks.OpenSearch"/>
+    <add key="serilog:write-to:OpenSearch.nodeUris" value="http://localhost:9200;http://remotehost:9200"/>
+    <add key="serilog:write-to:OpenSearch.indexFormat" value="custom-index-{0:yyyy.MM}"/>
+    <add key="serilog:write-to:OpenSearch.templateName" value="myCustomTemplate"/>    
+    <add key="serilog:write-to:OpenSearch.pipelineName" value="myCustomPipelineName"/>
+    <add key="serilog:write-to:OpenSearch.batchPostingLimit" value="50"/>
+    <add key="serilog:write-to:OpenSearch.batchAction" value="Create"/><!-- "Index" is default -->
+    <add key="serilog:write-to:OpenSearch.period" value="2"/>
+    <add key="serilog:write-to:OpenSearch.inlineFields" value="true"/>
+    <add key="serilog:write-to:OpenSearch.restrictedToMinimumLevel" value="Warning"/>
+    <add key="serilog:write-to:OpenSearch.bufferBaseFilename" value="C:\Temp\SerilogElasticBuffer"/>
+    <add key="serilog:write-to:OpenSearch.bufferFileSizeLimitBytes" value="5242880"/>
+    <add key="serilog:write-to:OpenSearch.bufferLogShippingInterval" value="5000"/>
+    <add key="serilog:write-to:OpenSearch.bufferRetainedInvalidPayloadsLimitBytes" value="5000"/>
+    <add key="serilog:write-to:OpenSearch.bufferFileCountLimit " value="31"/>
+    <add key="serilog:write-to:OpenSearch.connectionGlobalHeaders" value="Authorization=Bearer SOME-TOKEN;OtherHeader=OTHER-HEADER-VALUE" />
+    <add key="serilog:write-to:OpenSearch.connectionTimeout" value="5" />
+    <add key="serilog:write-to:OpenSearch.emitEventFailure" value="WriteToSelfLog" />
+    <add key="serilog:write-to:OpenSearch.queueSizeLimit" value="100000" />
+    <add key="serilog:write-to:OpenSearch.autoRegisterTemplate" value="true" />    
+    <add key="serilog:write-to:OpenSearch.overwriteTemplate" value="false" />
+    <add key="serilog:write-to:OpenSearch.registerTemplateFailure" value="IndexAnyway" />
+    <add key="serilog:write-to:OpenSearch.deadLetterIndexName" value="deadletter-{0:yyyy.MM}" />
+    <add key="serilog:write-to:OpenSearch.numberOfShards" value="20" />
+    <add key="serilog:write-to:OpenSearch.numberOfReplicas" value="10" />
+    <add key="serilog:write-to:OpenSearch.formatProvider" value="My.Namespace.MyFormatProvider, My.Assembly.Name" />
+    <add key="serilog:write-to:OpenSearch.connection" value="My.Namespace.MyConnection, My.Assembly.Name" />
+    <add key="serilog:write-to:OpenSearch.serializer" value="My.Namespace.MySerializer, My.Assembly.Name" />
+    <add key="serilog:write-to:OpenSearch.connectionPool" value="My.Namespace.MyConnectionPool, My.Assembly.Name" />
+    <add key="serilog:write-to:OpenSearch.customFormatter" value="My.Namespace.MyCustomFormatter, My.Assembly.Name" />
+    <add key="serilog:write-to:OpenSearch.customDurableFormatter" value="My.Namespace.MyCustomDurableFormatter, My.Assembly.Name" />
+    <add key="serilog:write-to:OpenSearch.failureSink" value="My.Namespace.MyFailureSink, My.Assembly.Name" />
   </appSettings>
 ```
 
