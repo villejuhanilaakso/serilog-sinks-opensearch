@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Authors>Michiel van Oudheusden, Martijn Laarman, Mogens Heller Grabe, Serilog Contributors</Authors>
+    <Authors>Michiel van Oudheusden, Martijn Laarman, Mogens Heller Grabe, Ville Laakso, Serilog Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -10,10 +10,10 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>Serilog.Sinks.OpenSearch</PackageId>
     <PackageTags>serilog;opensearch;logging;event;collector</PackageTags>
-    <PackageReleaseNotes>https://github.com/serilog-contrib/serilog-sinks-elasticsearch/blob/master/CHANGES.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/villejuhanilaakso/serilog-sinks-opensearch/blob/dev/CHANGES.md</PackageReleaseNotes>
     <PackageIcon>serilog-sink-nuget.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/serilog-contrib/serilog-sinks-elasticsearch</PackageProjectUrl>    
-    <RepositoryUrl>https://github.com/serilog-contrib/serilog-sinks-elasticsearch</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/villejuhanilaakso/serilog-sinks-opensearch</PackageProjectUrl>    
+    <RepositoryUrl>https://github.com/villejuhanilaakso/serilog-sinks-opensearch</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -22,6 +22,7 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <PackageLicenseUrl></PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">

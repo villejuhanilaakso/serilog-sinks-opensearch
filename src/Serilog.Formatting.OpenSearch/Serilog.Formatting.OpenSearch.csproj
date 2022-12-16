@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     
   <PropertyGroup>
-    <Authors>Michiel van Oudheusden, Martijn Laarman, Mogens Heller Grabe, Serilog Contributors</Authors>
+    <Authors>Michiel van Oudheusden, Martijn Laarman, Mogens Heller Grabe, Ville Laakso, Serilog Contributors</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -9,12 +9,12 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>Serilog.Formatting.OpenSearch</PackageId>
-    <PackageTags>serilog;elasticsearch;logging;event;formatting</PackageTags>
-    <PackageReleaseNotes>https://github.com/serilog-contrib/serilog-sinks-elasticsearch/blob/master/CHANGES.md</PackageReleaseNotes>
+    <PackageTags>serilog;opensearch;logging;event;formatting</PackageTags>
+    <PackageReleaseNotes>https://github.com/villejuhanilaakso/serilog-sinks-opensearch/blob/dev/CHANGES.md</PackageReleaseNotes>
     <PackageIcon>serilog-sink-nuget.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/serilog-contrib/serilog-sinks-elasticsearch</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/villejuhanilaakso/serilog-sinks-opensearch</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/serilog-contrib/serilog-sinks-elasticsearch</RepositoryUrl>
+    <RepositoryUrl>https://github.com/villejuhanilaakso/serilog-sinks-opensearch</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.3' ">1.6.1</NetStandardImplicitPackageVersion>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>

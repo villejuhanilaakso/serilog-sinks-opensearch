@@ -7,13 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{148431F6
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		appveyor.yml = appveyor.yml
-		Build.ps1 = Build.ps1
 		CHANGES.md = CHANGES.md
 		LICENSE = LICENSE
 		nuget.config = nuget.config
 		README.md = README.md
-		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.OpenSearch", "src\Serilog.Sinks.OpenSearch\Serilog.Sinks.OpenSearch.csproj", "{EEB0D119-687E-444E-BF14-9BDAEC9BA3EF}"
