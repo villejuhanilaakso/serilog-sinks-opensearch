@@ -29,8 +29,6 @@ namespace Serilog.Sinks.OpenSearch.Sample
                 {
                     AutoRegisterTemplate = true,
                     OverwriteTemplate = true,
-                    DetectOpenSearchVersion = true,
-                    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
                     NumberOfReplicas = 1,
                     NumberOfShards = 2,
                     //BufferBaseFilename = "./buffer",

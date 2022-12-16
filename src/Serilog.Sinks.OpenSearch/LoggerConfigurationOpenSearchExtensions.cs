@@ -72,7 +72,6 @@ namespace Serilog
         /// <param name="nodeUris">A comma or semi-colon separated list of URIs for OpenSearch nodes.</param>
         /// <param name="indexFormat"><see cref="OpenSearchSinkOptions.IndexFormat"/></param>
         /// <param name="templateName"><see cref="OpenSearchSinkOptions.TemplateName"/></param>
-        /// <param name="typeName"><see cref="OpenSearchSinkOptions.TypeName"/></param>
         /// <param name="batchPostingLimit"><see cref="OpenSearchSinkOptions.BatchPostingLimit"/></param>
         /// <param name="period"><see cref="OpenSearchSinkOptions.Period"/></param>
         /// <param name="inlineFields"><see cref="OpenSearchSinkOptions.InlineFields"/></param>
@@ -88,7 +87,6 @@ namespace Serilog
         /// <param name="queueSizeLimit"><see cref="OpenSearchSinkOptions.QueueSizeLimit"/>The maximum number of events that will be held in-memory while waiting to ship them to OpenSearch. Beyond this limit, events will be dropped. The default is 100,000. Has no effect on durable log shipping.</param>   
         /// <param name="pipelineName"><see cref="OpenSearchSinkOptions.PipelineName"/>Name the Pipeline where log events are sent to sink. Please note that the Pipeline should be existing before the usage starts.</param>   
         /// <param name="autoRegisterTemplate"><see cref="OpenSearchSinkOptions.AutoRegisterTemplate"/>When set to true the sink will register an index template for the logs in OpenSearch.</param>   
-        /// <param name="autoRegisterTemplateVersion"><see cref="OpenSearchSinkOptions.AutoRegisterTemplateVersion"/>When using the AutoRegisterTemplate feature, this allows to set the OpenSearch version. Depending on the version, a template will be selected. Defaults to pre 5.0.</param>  
         /// <param name="overwriteTemplate"><see cref="OpenSearchSinkOptions.OverwriteTemplate"/>When using the AutoRegisterTemplate feature, this allows you to overwrite the template in OpenSearch if it already exists. Defaults to false</param>   
         /// <param name="registerTemplateFailure"><see cref="OpenSearchSinkOptions.RegisterTemplateFailure"/>Specifies the option on how to handle failures when writing the template to OpenSearch. This is only applicable when using the AutoRegisterTemplate option.</param>  
         /// <param name="deadLetterIndexName"><see cref="OpenSearchSinkOptions.DeadLetterIndexName"/>Optionally set this value to the name of the index that should be used when the template cannot be written to ES.</param>  
@@ -111,7 +109,6 @@ namespace Serilog
             string nodeUris,
             string indexFormat = null,
             string templateName = null,
-            string typeName = "logevent",
             int batchPostingLimit = 50,
             int period = 2,
             bool inlineFields = false,
@@ -126,7 +123,6 @@ namespace Serilog
             int queueSizeLimit = 100000,
             string pipelineName = null,
             bool autoRegisterTemplate = false,
-            AutoRegisterTemplateVersion autoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv2,
             bool overwriteTemplate = false,
             RegisterTemplateRecovery registerTemplateFailure = RegisterTemplateRecovery.IndexAnyway,
             string deadLetterIndexName = null,
@@ -163,8 +159,6 @@ namespace Serilog
                 options.AutoRegisterTemplate = true;
                 options.TemplateName = templateName;
             }
-
-            options.TypeName = !string.IsNullOrWhiteSpace(typeName) ? typeName : null;
 
             options.BatchPostingLimit = batchPostingLimit;
             options.BatchAction = batchAction;
@@ -212,7 +206,6 @@ namespace Serilog
             options.PipelineName = pipelineName;
 
             options.AutoRegisterTemplate = autoRegisterTemplate;
-            options.AutoRegisterTemplateVersion = autoRegisterTemplateVersion;
             options.RegisterTemplateFailure = registerTemplateFailure;
             options.OverwriteTemplate = overwriteTemplate;
             options.NumberOfShards = numberOfShards;

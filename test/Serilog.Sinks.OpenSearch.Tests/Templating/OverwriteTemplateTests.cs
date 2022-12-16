@@ -9,8 +9,7 @@ namespace Serilog.Sinks.OpenSearch.Tests.Templating
 {
     public class OverwriteTemplateTests : OpenSearchSinkTestsBase
     {
-
-        public void DoRegister()
+        private void DoRegister()
         {
             _templateExistsReturnCode = 200;
 

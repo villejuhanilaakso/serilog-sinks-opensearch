@@ -34,7 +34,6 @@ public class OpenSearchPayloadReaderTests : IDisposable
         // Arrange
         var format = rollingInterval.GetFormat();
         var payloadReader = new OpenSearchPayloadReader("testPipelineName",
-            "TestTypeName",
             null,
             (_, _) => "TestIndex",
             OpenSearchOpType.Index,
@@ -73,7 +72,6 @@ public class OpenSearchPayloadReaderTests : IDisposable
 
         // Act
         Action act = () => new OpenSearchPayloadReader("testPipelineName",
-            "TestTypeName",
             null,
             (_, _) => "TestIndex",
             OpenSearchOpType.Index,

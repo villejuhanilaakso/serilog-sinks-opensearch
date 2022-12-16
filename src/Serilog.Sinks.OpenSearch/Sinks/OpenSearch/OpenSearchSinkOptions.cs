@@ -37,12 +37,6 @@ namespace Serilog.Sinks.OpenSearch
         public bool AutoRegisterTemplate { get; set; }
 
         /// <summary>
-        /// When using the <see cref="AutoRegisterTemplate"/> feature, this allows to set the OpenSearch version. Depending on the
-        /// version, a template will be selected. Defaults to pre 5.0.
-        /// </summary>
-        public AutoRegisterTemplateVersion AutoRegisterTemplateVersion { get; set; }
-
-        /// <summary>
         /// Specifies the option on how to handle failures when writing the template to OpenSearch. This is only applicable when using the AutoRegisterTemplate option.
         /// </summary>
         public RegisterTemplateRecovery RegisterTemplateFailure { get; set; }
@@ -108,11 +102,6 @@ namespace Serilog.Sinks.OpenSearch
         /// defaults to "deadletter-{0:yyyy.MM.dd}"
         /// </summary>
         public string DeadLetterIndexName { get; set; }
-
-        ///<summary>
-        /// The default OpenSearch type name to use for the log events. Defaults to: "_doc".
-        /// </summary>
-        public string TypeName { get; set; }
 
         /// <summary>
         /// Configures the <see cref="OpType"/> being used when bulk indexing documents.
@@ -284,53 +273,24 @@ namespace Serilog.Sinks.OpenSearch
         /// <summary>
         /// Configures the OpenSearch sink defaults
         /// </summary>
-        public OpenSearchSinkOptions()
+        private OpenSearchSinkOptions()
         {
-            this.IndexFormat = "logstash-{0:yyyy.MM.dd}";
-            this.DeadLetterIndexName = "deadletter-{0:yyyy.MM.dd}";
-            this.TypeName = DefaultTypeName;
-            this.Period = TimeSpan.FromSeconds(2);
-            this.BatchPostingLimit = 50;
-            this.SingleEventSizePostingLimit = null;
-            this.TemplateName = "serilog-events-template";
-            this.ConnectionTimeout = TimeSpan.FromSeconds(5);
-            this.EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog;
-            this.RegisterTemplateFailure = RegisterTemplateRecovery.IndexAnyway;
-            this.QueueSizeLimit = 100000;
-            this.BufferFileCountLimit = 31;
-            this.BufferFileSizeLimitBytes = 100L * 1024 * 1024;
-            this.FormatStackTraceAsArray = false;
-            this.ConnectionPool = new SingleNodeConnectionPool(_defaultNode);
-            this.BufferFileRollingInterval = RollingInterval.Day;
+            IndexFormat = "logstash-{0:yyyy.MM.dd}";
+            DeadLetterIndexName = "deadletter-{0:yyyy.MM.dd}";
+            Period = TimeSpan.FromSeconds(2);
+            BatchPostingLimit = 50;
+            SingleEventSizePostingLimit = null;
+            TemplateName = "serilog-events-template";
+            ConnectionTimeout = TimeSpan.FromSeconds(5);
+            EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog;
+            RegisterTemplateFailure = RegisterTemplateRecovery.IndexAnyway;
+            QueueSizeLimit = 100000;
+            BufferFileCountLimit = 31;
+            BufferFileSizeLimitBytes = 100L * 1024 * 1024;
+            FormatStackTraceAsArray = false;
+            ConnectionPool = new SingleNodeConnectionPool(_defaultNode);
+            BufferFileRollingInterval = RollingInterval.Day;
         }
-
-        /// <summary>
-        /// The default OpenSearch type name used for OpenSearch versions prior to 7.
-        /// <para>As of <c>OpenSearch 7</c> and up <c>_type</c> has been removed.</para>
-        /// </summary>
-        // TODO: check how this works in relation to OpenSearch versioning.
-        public static string DefaultTypeName { get; } = "_doc";
-
-        /// <summary>
-        /// Instructs the sink to auto detect the running OpenSearch version.
-        ///
-        /// <para>
-        /// This information is used to attempt to register an older or newer template
-        /// </para>
-        /// <para></para>
-        ///
-        /// <para>
-        /// Currently supports:
-        /// </para>
-        /// <para></para>
-        /// 
-        /// <para>
-        /// Currently supports:
-        /// - using <see cref="Serilog.Sinks.OpenSearch.AutoRegisterTemplateVersion.ESv7"/> against <c> Elasticsearch 6.x </c>
-        /// - using <see cref="Serilog.Sinks.OpenSearch.AutoRegisterTemplateVersion.ESv6"/> against <c> Elasticsearch 7.x </c>
-        /// </para>
-        /// </summary>
-        public bool DetectOpenSearchVersion { get; set; }
 
         /// <summary>
         /// Configures the OpenSearch sink

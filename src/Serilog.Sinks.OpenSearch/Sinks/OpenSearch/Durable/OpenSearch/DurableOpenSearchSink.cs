@@ -58,7 +58,6 @@ namespace Serilog.Sinks.OpenSearch.Durable
 
             var payloadReader = new OpenSearchPayloadReader(
                  pipelineName: _state.Options.PipelineName,  
-                 typeName:_state.Options.TypeName, 
                  serialize:_state.Serialize,  
                  getIndexForEvent: _state.GetBufferedIndexForEvent,
                  openSearchOpType: _state.Options.BatchAction,

@@ -13,7 +13,6 @@ namespace Serilog.Sinks.OpenSearch.Durable
     public class OpenSearchPayloadReader: APayloadReader<List<string>>
     {
         private readonly string _pipelineName;
-        private readonly string _typeName;
         private readonly Func<object, string> _serialize;
         private readonly Func<string, DateTime,string> _getIndexForEvent;
         private readonly OpenSearchOpType _openSearchOpType;
@@ -26,12 +25,11 @@ namespace Serilog.Sinks.OpenSearch.Durable
         /// 
         /// </summary>
         /// <param name="pipelineName"></param>
-        /// <param name="typeName"></param>
         /// <param name="serialize"></param>
         /// <param name="getIndexForEvent"></param>
         /// <param name="openSearchOpType"></param>
         /// <param name="rollingInterval"></param>
-        public OpenSearchPayloadReader(string pipelineName, string typeName, Func<object, string> serialize,
+        public OpenSearchPayloadReader(string pipelineName, Func<object, string> serialize,
             Func<string, DateTime, string> getIndexForEvent, OpenSearchOpType openSearchOpType, RollingInterval rollingInterval)
         {
             if ((int)rollingInterval < (int)RollingInterval.Day)
@@ -40,7 +38,6 @@ namespace Serilog.Sinks.OpenSearch.Durable
             }
             
             _pipelineName = pipelineName;
-            _typeName = typeName;
             _serialize = serialize;
             _getIndexForEvent = getIndexForEvent;
             _openSearchOpType = openSearchOpType;
@@ -95,8 +92,7 @@ namespace Serilog.Sinks.OpenSearch.Durable
             var action = OpenSearchSink.CreateOpenSearchAction(
                 opType: _openSearchOpType, 
                 indexName: indexName, pipelineName: _pipelineName,
-                id: _count + "_" + Guid.NewGuid(),
-                mappingType: _typeName);
+                id: _count + "_" + Guid.NewGuid());
             var actionJson = LowLevelRequestResponseSerializer.Instance.SerializeToString(action);
 
             _payload.Add(actionJson);

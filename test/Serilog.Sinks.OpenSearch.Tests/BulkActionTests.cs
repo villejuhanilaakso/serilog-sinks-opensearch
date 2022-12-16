@@ -13,7 +13,6 @@ namespace Serilog.Sinks.OpenSearch.Tests
         public void DefaultBulkActionV7()
         {
             _options.IndexFormat = "logs";
-            _options.TypeName = "_doc";
             _options.PipelineName = null;
             using (var sink = new OpenSearchSink(_options))
             {
@@ -30,8 +29,6 @@ namespace Serilog.Sinks.OpenSearch.Tests
         public void BulkActionV7OverrideTypeName()
         {
             _options.IndexFormat = "logs";
-            _options.TypeName = "logevent"; // This is the default value when creating the sink via configuration
-            _options.AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7;
             _options.PipelineName = null;
             using (var sink = new OpenSearchSink(_options))
             {
@@ -48,7 +45,6 @@ namespace Serilog.Sinks.OpenSearch.Tests
         public void DefaultBulkActionV8()
         {
             _options.IndexFormat = "logs";
-            _options.TypeName = null;
             _options.PipelineName = null;
             using (var sink = new OpenSearchSink(_options))
             {
@@ -66,7 +62,6 @@ namespace Serilog.Sinks.OpenSearch.Tests
         public void BulkActionDataStreams()
         {
             _options.IndexFormat = "logs-my-stream";
-            _options.TypeName = null;
             _options.PipelineName = null;
             _options.BatchAction = OpenSearchOpType.Create;
             
@@ -85,7 +80,6 @@ namespace Serilog.Sinks.OpenSearch.Tests
         public void PipelineAction()
         {
             _options.IndexFormat = "logs-my-stream";
-            _options.TypeName = "_doc";
             _options.PipelineName = "my-pipeline";
             _options.BatchAction = OpenSearchOpType.Index;
             

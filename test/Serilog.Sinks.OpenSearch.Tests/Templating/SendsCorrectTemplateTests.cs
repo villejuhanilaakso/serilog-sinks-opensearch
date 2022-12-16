@@ -6,14 +6,14 @@ using Xunit;
 
 namespace Serilog.Sinks.OpenSearch.Tests.Templating
 {
-    public class Sendsv6TemplateTests : OpenSearchSinkTestsBase
+    public class SendsCorrectTemplateTests : OpenSearchSinkTestsBase
     {
         private readonly Tuple<Uri, string> _templatePut;
 
-        public Sendsv6TemplateTests()
+        public SendsCorrectTemplateTests()
         {
             _options.AutoRegisterTemplate = true;
-            _options.AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6;
+            _options.IndexAliases = new string[] { "logstash" };
 
             var loggerConfig = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -36,8 +36,8 @@ namespace Serilog.Sinks.OpenSearch.Tests.Templating
         public void ShouldRegisterTheCorrectTemplateOnRegistration()
         {
 
-            var method = typeof(Sendsv6TemplateTests).GetMethod(nameof(ShouldRegisterTheCorrectTemplateOnRegistration));
-            JsonEquals(_templatePut.Item2, method, "template_v6.json");
+            var method = typeof(SendsCorrectTemplateTests).GetMethod(nameof(ShouldRegisterTheCorrectTemplateOnRegistration));
+            JsonEquals(_templatePut.Item2, method, "template_v7.json");
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace Serilog.Sinks.OpenSearch.Tests.Templating
         protected void JsonEquals(string json, MethodBase method, string fileName = null)
         {
 #if DOTNETCORE
-            var assembly = typeof(Sendsv6TemplateTests).GetTypeInfo().Assembly;
+            var assembly = typeof(SendsCorrectTemplateTests).GetTypeInfo().Assembly;
 #else
             var assembly = Assembly.GetExecutingAssembly();
 #endif

@@ -13,7 +13,6 @@ namespace Serilog.Sinks.OpenSearch.Tests.Templating
             var options = new OpenSearchSinkOptions(new Uri("http://localhost:9100"))
             {
                 AutoRegisterTemplate = true,
-
                 NumberOfShards = 2,
                 NumberOfReplicas = 0
             };

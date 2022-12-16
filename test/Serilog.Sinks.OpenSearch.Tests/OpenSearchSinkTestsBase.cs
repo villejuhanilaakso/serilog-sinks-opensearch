@@ -72,7 +72,7 @@ namespace Serilog.Sinks.OpenSearch.Tests
                 }
                 action.IndexAction.Should().NotBeNull();
                 action.IndexAction.Index.Should().NotBeNullOrEmpty().And.StartWith("logstash-");
-                action.IndexAction.Type.Should().NotBeNullOrEmpty().And.Be("_doc");
+                action.IndexAction.Type.Should().BeNullOrEmpty();
 
                 SerilogOpenSearchEvent actionMetaData;
                 try

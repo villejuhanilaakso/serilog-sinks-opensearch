@@ -14,10 +14,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using OpenSearch.Net;
-using OpenSearch.Net.Specification.CatApi;
 using OpenSearch.Net.Specification.IndicesApi;
 using Serilog.Debugging;
 using Serilog.Events;
@@ -50,12 +48,7 @@ namespace Serilog.Sinks.OpenSearch
         private readonly string _templateName;
         private readonly string _templateMatchString;
         private static readonly Regex IndexFormatRegex = new Regex(@"^(.*)(?:\{0\:.+\})(.*)$");
-        private string _discoveredVersion;
 
-        public string DiscoveredVersion => _discoveredVersion;
-        private bool IncludeTypeName =>
-            (DiscoveredVersion?.StartsWith("7.") ?? false)
-            && _options.AutoRegisterTemplateVersion == AutoRegisterTemplateVersion.ESv6;
         public OpenSearchSinkOptions Options => _options;
         public IOpenSearchLowLevelClient Client => _client;
         public ITextFormatter Formatter => _formatter;
@@ -67,12 +60,6 @@ namespace Serilog.Sinks.OpenSearch
         {
             if (string.IsNullOrWhiteSpace(options.IndexFormat)) throw new ArgumentException("options.IndexFormat");
             if (string.IsNullOrWhiteSpace(options.TemplateName)) throw new ArgumentException("options.TemplateName");
-
-            // Since TypeName is deprecated we shouldn't set it, if has been deliberately set to null.
-            if (options.TypeName != null && options.AutoRegisterTemplateVersion == AutoRegisterTemplateVersion.ESv7)
-            {
-                options.TypeName = "_doc";
-            }
 
             _templateName = options.TemplateName;
             _templateMatchString = IndexFormatRegex.Replace(options.IndexFormat, @"$1*$2");
@@ -166,10 +153,7 @@ namespace Serilog.Sinks.OpenSearch
                 }
 
                 var result = _client.Indices.PutTemplateForAll<StringResponse>(_templateName, GetTemplatePostData(),
-                    new PutIndexTemplateRequestParameters
-                    {
-                        IncludeTypeName = IncludeTypeName ? true : (bool?)null
-                    });
+                    new PutIndexTemplateRequestParameters());
 
                 if (!result.Success)
                 {
@@ -230,36 +214,9 @@ namespace Serilog.Sinks.OpenSearch
 
             return OpenSearchTemplateProvider.GetTemplate(
                 _options,
-                DiscoveredVersion,
                 settings,
-                _templateMatchString,
-                _options.AutoRegisterTemplateVersion);
+                _templateMatchString);
 
-        }
-
-        public void DiscoverClusterVersion()
-        {
-            if (!_options.DetectOpenSearchVersion) return;
-
-            try
-            {
-
-                var response = _client.Cat.Nodes<StringResponse>(new CatNodesRequestParameters()
-                {
-                    Headers = new[] { "v" }
-                });
-                if (!response.Success) return;
-
-                _discoveredVersion = response.Body.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                    .FirstOrDefault();
-
-                if (_discoveredVersion?.StartsWith("7.") ?? false)
-                    _options.TypeName = "_doc";
-            }
-            catch (Exception ex)
-            {
-                SelfLog.WriteLine("Failed to discover the cluster version. {0}", ex);
-            }
         }
     }
 }

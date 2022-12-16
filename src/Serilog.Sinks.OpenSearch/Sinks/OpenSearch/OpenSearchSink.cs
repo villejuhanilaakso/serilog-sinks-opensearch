@@ -41,7 +41,6 @@ namespace Serilog.Sinks.OpenSearch
             : base(options.BatchPostingLimit, options.Period, options.QueueSizeLimit)
         {
             _state = OpenSearchSinkState.Create(options);
-            _state.DiscoverClusterVersion();
             _state.RegisterTemplateIfNeeded();
         }
 
@@ -181,8 +180,7 @@ namespace Serilog.Sinks.OpenSearch
                 var action = CreateOpenSearchAction(
                     opType: _state.Options.BatchAction, 
                     indexName: indexName,
-                    pipelineName: pipelineName, 
-                    mappingType: _state.Options.TypeName);
+                    pipelineName: pipelineName);
                 payload.Add(LowLevelRequestResponseSerializer.Instance.SerializeToString(action));
 
                 var sw = new StringWriter();
@@ -266,13 +264,12 @@ namespace Serilog.Sinks.OpenSearch
                 ? "create"
                 : "index";
         
-        internal static object CreateOpenSearchAction(OpenSearchOpType opType, string indexName, string pipelineName = null, string id = null, string mappingType = null)
+        internal static object CreateOpenSearchAction(OpenSearchOpType opType, string indexName, string pipelineName = null, string id = null)
         {
             var actionPayload = new OpenSearchActionPayload(
                 indexName: indexName,
                 pipeline: string.IsNullOrWhiteSpace(pipelineName) ? null : pipelineName,
-                id: id,
-                mappingType: mappingType
+                id: id
             );
 
             var action = opType == OpenSearchOpType.Create
